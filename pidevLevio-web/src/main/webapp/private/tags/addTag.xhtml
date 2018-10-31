@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Add Tag" outcome="/private/tags/addTag"
+							icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+					<p:menuitem value="Retrive All Tags" outcome="/private/tags/getAllTags"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+					</p:menuitem>	
+						
+						
+					</p:tabMenu>
+
+				</div>
+				<div class="card card-w-title">
+					<h1>Add Tag</h1>
+
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid" styleClass="ui-panelgrid-blank form-group"
+							style="border:0px none; background-color:transparent;">
+
+							<p:outputLabel for="tag" value="Tag name" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="tag" value="#{tagbean.title}" />
+								<label>tag name</label>
+							</h:panelGroup>
+							<p:commandButton value="Add" styleClass="red-button"
+								style="width:100px" process="@form" update="@form" ajax="true"
+								action="#{tagbean.addTag()}" />
+
+						</p:panelGrid>
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

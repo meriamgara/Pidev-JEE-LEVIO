@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g dashboard">
+			<ui:repeat var="item" value="#{videoBean.coolList}">
+				<div class="ui-g-12 ui-md-6">
+					<div class="card overview">
+						<div class="overview-content clearfix">
+							<span class="overview-title">Video Of #{item.title}</span> 
+							<br></br>
+							<span
+								class="overview-title">Date of publish #{item.datepublish}</span>
+
+							<p:media
+								value="https://www.youtube.com/v/#{item.id}&amp;hl=en&amp;fs=1&amp;"
+								width="480" height="400" player="flash" />
+
+						</div>
+						<div class="overview-footer">
+							<p:graphicImage name="images/dashboard/sales.svg"
+								library="ultima-layout" style="width: 100%" />
+						</div>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<script
+			src="http://maps.google.com/maps/api/js?key=AIzaSyDJNlP1fiQW5-lbKhTdXBoLbn7o1MBoJKU"
+			type="text/javascript"></script>
+		<div class="ui-fluid">
+			<div class="ui-g">
+				<div class="ui-g-12">
+					<div class="card">
+
+						<p:tabMenu activeIndex="#{param.i}">
+							<p:menuitem value="Add Research Center"
+								outcome="/private/centres/addResource" icon="ui-icon-add">
+								<f:param name="i" value="0" />
+							</p:menuitem>
+							<p:menuitem value="Retrive All Centres"
+								outcome="/private/centres/getAllCentres"
+								icon="ui-icon-insert-drive-file">
+								<f:param name="i" value="1" />
+							</p:menuitem>
+							<p:menuitem value="Retrive All Centres on Map"
+								outcome="/private/centres/retriveonmap"
+								icon="ui-icon-insert-drive-file">
+								<f:param name="i" value="2" />
+							</p:menuitem>
+						</p:tabMenu>
+					</div>
+					<div class="card card-w-title">
+						<h1>Retrive All Centres on Map</h1>
+						<h:form>
+							<p:gmap center="36.8997246, 10.1810433" zoom="15" type="HYBRID"
+								style="width:100%;height:400px" model="#{centerbean.model}">
+								<p:ajax event="overlaySelect"
+									listener="#{centerbean.onMarkerSelect}"></p:ajax>
+								<p:gmapInfoWindow id="infoWindow">
+									<p:outputPanel
+										style="text-align: center; display: block; margin: auto">
+										<b><h:outputText value="#{centerbean.marker.title}" /></b>
+										<br></br>
+										<h:outputText value="#{centerbean.marker.data}" />
+									</p:outputPanel>
+								</p:gmapInfoWindow>
+							</p:gmap>
+
+
+
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

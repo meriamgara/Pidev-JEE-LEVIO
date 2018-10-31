@@ -1,0 +1,276 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Add Research Center"
+							outcome="/private/centres/addResource" icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+						<p:menuitem value="Retrive All Centres"
+							outcome="/private/centres/getAllCentres"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+						<p:menuitem value="Retrive All Centres on Map"
+							outcome="/private/centres/retriveonmap"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="2" />
+						</p:menuitem>
+					</p:tabMenu>
+				</div>
+				<div class="card card-w-title">
+					<h1>Centres</h1>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+						<p:dataTable var="center" value="#{centerbean.centres}"
+							selectionMode="single" reflow="true" selection="#{center}"
+							rowKey="#{center.cen_code}" paginator="true" rows="7">
+							<f:facet name="header">
+							</f:facet>
+							<p:column headerText="Reseach Center Code"
+								sortBy="#{center.cen_code}">
+								<h:outputText value="#{center.cen_code}" />
+							</p:column>
+
+							<p:column headerText="Reseach Center Name"
+								sortBy="#{center.cen_name}">
+								<h:outputText value="#{center.cen_name}" />
+							</p:column>
+
+							<p:column headerText="Access Type"
+								sortBy="#{center.cen_access_type}">
+								<h:outputText value="#{center.cen_access_type}" />
+							</p:column>
+
+							<p:column headerText="Reseach Center Activity Type"
+								sortBy="#{center.cen_activity_type}">
+								<h:outputText value="#{center.cen_activity_type}" />
+							</p:column>
+
+							<p:column headerText="Reseach Center Address"
+								sortBy="#{center.cen_address}">
+								<h:outputText
+									value="#{center.cen_address.numStreet} #{center.cen_address.street} #{center.cen_address.postalCode} #{center.cen_country}" />
+							</p:column>
+
+							<p:column headerText="Reseach Center Phone"
+								sortBy="#{center.cen_contact_phone}">
+								<h:outputText value="#{center.cen_contact_phone}" />
+							</p:column>
+
+							<p:column headerText="Reseach Center E-mail"
+								sortBy="#{center.cen_contact_mail}">
+								<h:outputText value="#{center.cen_contact_mail}" />
+							</p:column>
+							<p:column headerText="Action">
+								<p:commandButton id="Edit" icon="ui-icon-edit"
+									action="#{centerbean.preUpdate(center)}" update="taha">
+								</p:commandButton>
+								<p:commandButton id="delete"
+									action="#{centerbean.removeResearchCenter(center)}"
+									icon="ui-icon-trash" update="@form" ajax="true">
+									<p:confirm header="Delete Record"
+										message="Are you sure about deleting this record?"
+										icon="ui-icon-alert" />
+								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="explode">
+									<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" />
+									<p:commandButton value="No" styleClass="ui-confirmdialog-no" />
+								</p:confirmDialog>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<br></br>
+
+					<h:form id="taha">
+						<p:panelGrid columns="4" rendered="#{centerbean.state}"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid" styleClass="ui-panelgrid-blank form-group"
+							style="border:0px none; background-color:transparent;">
+
+							<p:outputLabel for="researchcenter" value="Research Center Code" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="researchcenter"
+									value="#{centerbean.r.cen_code}" required="true"
+									autocomplete="off"
+									requiredMessage="Code must be unique and not empty" />
+								<label>Research Cente Coder</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="name" value="Research Center Name" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="name" value="#{centerbean.r.cen_name}"
+									required="true" autocomplete="off"
+									requiredMessage="Name is Required" />
+								<label>Research Center Name</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="onemenu" value="Center Access Type" />
+							<p:selectOneMenu id="onemenu"
+								value="#{centerbean.r.cen_access_type}">
+								<f:selectItems value="#{enumbean.types()}" var="a"
+									itemValue="#{a}"></f:selectItems>
+							</p:selectOneMenu>
+							<p:outputLabel for="activity" value="Center Activity" />
+							<p:selectOneMenu value="#{centerbean.r.cen_activity_type}"
+								id="activity">
+								<f:selectItems value="#{enumbean.activity()}" var="item"
+									itemValue="#{item}"></f:selectItems>
+							</p:selectOneMenu>
+
+							<p:outputLabel for="country" value="Center Country" />
+							<p:selectOneMenu value="#{centerbean.r.cen_country}" id="country"
+								required="true" requiredMessage="Country is Required">
+								<f:selectItems value="#{enumbean.countries()}" var="i"
+									itemLabel="#{i.displayCountry}" itemValue="#{i.displayName}"></f:selectItems>
+							</p:selectOneMenu>
+
+							<p:outputLabel for="number" value="Street Number" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="number"
+									value="#{centerbean.r.cen_address.numStreet}" required="true"
+									requiredMessage="Street Number is Required" />
+								<label>Street Number</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="street" value="Street" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="street"
+									value="#{centerbean.r.cen_address.street}" required="true"
+									requiredMessage="Street is Required" />
+								<label>Street</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="postalcode" value="Postal Code" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="postalcode"
+									value="#{centerbean.r.cen_address.postalCode}" required="true"
+									requiredMessage="Postalcode is Required" />
+								<label>Postal Coode</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="borrow" value="Center Borrow" />
+							<p:selectOneMenu id="borrow" value="#{centerbean.r.cen_borrow}">
+								<f:selectItems value="#{enumbean.borrows()}" var="b"
+									itemValue="#{b}"></f:selectItems>
+							</p:selectOneMenu>
+
+							<p:outputLabel for="sigle" value="Sigle" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="sigle" value="#{centerbean.r.cen_cigle}" />
+								<label>Sigle</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="mail" value="Contact Mail" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="mail" value="#{centerbean.r.cen_contact_mail}" />
+								<label>Mail</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="phone" value="Contact Phone" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="phone"
+									value="#{centerbean.r.cen_contact_phone}" />
+								<label>Phone number</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="fb" value="Contact Facebook Page" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="fb" value="#{centerbean.r.cen_facebook_page}" />
+								<label>Facebook Page</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="catalog" value="Url Catalog" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="catalog"
+									value="#{centerbean.r.cen_url_catalog}" />
+								<label>http://</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="website" value="Web Site" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="website" value="#{centerbean.r.cen_website}" />
+								<label>http://</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="workingtime" value="Working Time" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="workingtime"
+									value="#{centerbean.r.cen_working_time}" />
+								<label>working time</label>
+							</h:panelGroup>
+
+							<p:outputLabel for="x" value="Latitude" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="x" value="#{centerbean.r.cen_x}" />
+								<label>Latitude </label>
+							</h:panelGroup>
+
+							<p:outputLabel for="y" value="Longitude" />
+
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="y" value="#{centerbean.r.cen_y}" />
+								<label>Longitude </label>
+							</h:panelGroup>
+
+							<p:outputLabel for="internet" value="Internet" />
+							<p:selectOneMenu id="internet"
+								value="#{centerbean.r.cen_internet}">
+								<f:selectItems value="#{enumbean.internet()}" var="net"
+									itemValue="#{net}"></f:selectItems>
+							</p:selectOneMenu>
+
+							<p:outputLabel for="type" value="Type" />
+							<p:selectOneMenu id="type" value="#{centerbean.r.cen_type}">
+								<f:selectItems value="#{enumbean.centres()}" var="c"
+									itemValue="#{c}"></f:selectItems>
+							</p:selectOneMenu>
+						</p:panelGrid>
+
+						<p:pickList required="true" rendered="#{centerbean.state}"
+							requiredMessage="You must at least have a domain" id="pickList"
+							value="#{centerbean.dual}" var="entity" itemLabel="#{entity}"
+							itemValue="#{entity}" showSourceControls="true"
+							showTargetControls="true" showSourceFilter="true"
+							showTargetFilter="true" responsive="true">
+							<o:converter converterId="omnifaces.ListIndexConverter"
+								list="#{centerbean.fullList}" />
+							<f:facet name="sourceCaption">From</f:facet>
+							<f:facet name="targetCaption">To</f:facet>
+						</p:pickList>
+						<br />
+						<p:commandButton id="btn" value="Edit" styleClass="red-button"
+							action="#{centerbean.update()}" style="width:100px"
+							process="@form" update="@form" ajax="true"
+							rendered="#{centerbean.state}" />
+
+					</h:form>
+				</div>
+
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml"
+	xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Ajouter Competence"
+							outcome="/CompetencePages/ajouterCompetence" icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+						<p:menuitem value="Afficher toutes les Competences"
+							outcome="/CompetencePages/Afficher"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+					</p:tabMenu>
+				</div>
+				<div class="card card-w-title">
+					<h1>Competences</h1>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+						<p:dataTable var="competence"
+							value="#{competenceBean.filtredcompetence}"
+							selectionMode="single" reflow="true" selection="#{competence}"
+							rowKey="#{competence.libelle}" paginator="true" rows="5"
+							id="table">
+							<f:facet name="header">
+								<p:selectOneMenu id="onemenu" value="#{data.categorie}">
+									<f:selectItems value="#{data.typeCategories}" var="a"
+										itemValue="#{a}" itemLabel="#{a}"></f:selectItems>
+									<p:ajax listener="#{competenceBean.filtres(data.categorie)}" update="table"></p:ajax>
+								</p:selectOneMenu>
+							</f:facet>
+							<p:column headerText="Libelle" sortBy="#{competence.libelle}">
+								<h:outputText value="#{competence.libelle}" />
+							</p:column>
+							<p:column headerText="Categorie" sortBy="#{competence.categorie}">
+								<h:outputText value="#{competence.categorie}" />
+							</p:column>
+
+						</p:dataTable>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
