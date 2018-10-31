@@ -23,7 +23,7 @@ import tn.esprit.pidevLevio.entities.typeCategorie;
 public class CompetenceService implements CompetenceServiceInterface {
 
 	
-	@PersistenceContext(unitName = "pidev-ejb")
+	@PersistenceContext(unitName = "pidevLevio-ejb")
 	EntityManager em;
 
 	
