@@ -1,4 +1,4 @@
-package tn.esprit.pidev.services;
+package tn.esprit.pidevLevio.services;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import tn.esprit.pidev.entities.Benefice;
 @Stateless
 @LocalBean
 public class BeneficeServices implements BeneficeService {
-	@PersistenceContext(unitName="pidev-ejb")
+	@PersistenceContext(unitName="pidevLevio-ejb")
 	EntityManager em;
 	
 	
