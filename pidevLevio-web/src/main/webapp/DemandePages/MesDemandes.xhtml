@@ -1,0 +1,270 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/front.xhtml">
+<style>
+body .ui-datatable tbody tr.ui-state-highlight .ui-inputfield {
+    color: #000;
+    border-color: #ffffff;
+}
+</style>
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Ajouter une demande"
+							outcome="/DemandePages/ajout" icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+						
+						<p:menuitem value="Mes Demandes"
+							outcome="/DemandePages/MesDemandes"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+
+
+					</p:tabMenu>
+
+
+				</div>
+				<div class="card card-w-title">
+					<h1>Chapters</h1>
+
+                    <p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+				<p:dataTable var="demande" value="#{demandeBean.mesDemandes}"
+							selectionMode="single" reflow="true" selection="#{demande}"
+							rowKey="#{demande.nomD}" paginator="true" rows="5">
+
+
+					
+
+
+							<p:column headerText="Nom Demandeur"  sortBy="#{demande.nomD}" filterBy="#{chapter.chapterTitle}"  filterMatchMode="contains" >
+								<h:outputText value="#{demande.nomD}" />
+							</p:column>
+							
+							<p:column headerText="Prenom"  sortBy="#{demande.prenomD}"  >
+								<h:outputText value="#{demande.prenomD}" />
+							</p:column>
+							
+							<p:column headerText="E-mail"  sortBy="#{demande.email}"  >
+								<h:outputText value="#{demande.email}" />
+							</p:column>
+							
+								<p:column headerText="Télephone"  sortBy="#{demande.tel}"  >
+								<h:outputText value="#{demande.tel}" />
+							</p:column>
+							
+							
+							<p:column headerText="Action">
+							<!-- boutton delete -->
+								<p:commandButton id="delete" 
+ 									action="#{demandeBean.supprimer(demande.id)}"
+ 									icon="ui-icon-trash" update="@form" ajax="true"> 
+ 									<p:confirm header="Delete Record" 
+ 										message="Are you sure about deleting this record?"
+ 										icon="ui-icon-alert" />
+ 								</p:commandButton>
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" />
+									<p:commandButton value="No" styleClass="ui-confirmdialog-no" />
+								</p:confirmDialog>
+								
+								<!-- fin boutton delete -->
+								
+									
+								
+								
+								<!-- boutton update -->
+								<p:commandButton id="dialog2" icon="ui-icon-edit"
+									oncomplete="PF('update').show()" style="max-width:150px;"
+									action="#{demandeBean.modifier(demande)}" />
+								<p:dialog header="Edit" widgetVar="update" resizable="false"
+									draggable="false" responsive="true" hideEffect="scale">
+									<div class="ui-g form-group" style="margin-bottom: 16px;">
+										<div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.nomD}" />
+												<label>nom</label>
+											</h:panelGroup>
+									    </div>
+									    
+																    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.prenomD}" />
+												<label>Prénom</label>
+											</h:panelGroup>
+									    </div>
+									  
+									    
+									      <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.email}" />
+												<label>Email</label>
+											</h:panelGroup>
+									    </div> 
+									    
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.diplome}" />
+												<label>Dimploe</label>
+											</h:panelGroup>
+									    </div>
+									    
+									    
+									 
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.age}" />
+												<label>Age</label>
+											</h:panelGroup>
+									    </div>
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.comptences}" />
+												<label>compétence</label>
+											</h:panelGroup>
+									    </div>
+									    
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<p:inputText value="#{demandeBean.poste}" />
+												<label>poste desiré</label>
+											</h:panelGroup>
+									    </div>  
+									    
+									</div>
+
+									<f:facet name="footer">
+										<p:commandButton value="edit" action="#{demandeBean.updateDemande()}"
+											oncomplete="PF('update').hide()" style="width:auto"
+											icon="ui-icon-edit" update="@form" ajax="fasle" />
+									</f:facet>
+								</p:dialog>
+								
+								
+								<!-- fin update -->								
+								
+							<!-- *****show***** -->
+					<p:commandButton id="dialog3" icon="ui-icon ui-icon-visibility"
+									oncomplete="PF('show').show()" style="max-width:150px;"
+									 />
+								<p:dialog header="Afficher" widgetVar="show" resizable="false"
+									draggable="false" responsive="true" hideEffect="scale">
+									<div class="ui-g form-group" style="margin-bottom: 16px;color:#000">
+										<div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+											    
+												<h:outputText value="Nom: #{demandeBean.nomD}" />
+												
+											</h:panelGroup>
+									    </div>
+									    
+																    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+											
+												<h:outputText value="Prénom: #{demandeBean.prenomD}"/>
+												
+											</h:panelGroup>
+									    </div>
+									  
+									    
+									      <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<h:outputText value="Email: #{demandeBean.email}"  />
+											
+											</h:panelGroup>
+									    </div> 
+									    
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<h:outputText value="Diplome: #{demandeBean.diplome}" />
+											
+											</h:panelGroup>
+									    </div>
+									    
+									    
+									 
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<h:outputText value="Age: #{demandeBean.age}" />
+												
+											</h:panelGroup>
+									    </div>
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<h:outputText value="Compétence: #{demandeBean.comptences}" />
+												
+											</h:panelGroup>
+									    </div>
+									    
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+												<h:outputText value="Poste desiré: #{demandeBean.poste}"  />
+												<label></label>
+											</h:panelGroup>
+									    </div>
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+											    <p>Image</p>
+												<a href="/pidev-web/files/images/#{demandeBean.image}" target="_blanc">Ouvrir</a>
+												
+											</h:panelGroup>
+									    </div>									    
+									    
+									    <div class="ui-g-12">
+											<h:panelGroup styleClass="md-inputfield">
+										    	<p>Cv</p>
+												<a href="/pidev-web/files/cv/#{demandeBean.cv}" target="_blanc">Ouvrir</a>
+												
+											</h:panelGroup>
+									    </div>									    
+									      
+									    
+									</div>
+
+									<f:facet name="footer">
+									
+										<p:commandButton value="fermer" action="#"
+											oncomplete="PF('show').hide()" style="width:auto"
+											icon="" update="@form" ajax="true" />
+									</f:facet>
+								</p:dialog>
+								
+									
+							
+					 			
+							<!--
+							<p:commandButton  icon="ui-icon ui-icon-visibility"
+								
+								action="#{demandeBean.modifier(demande)}"/>
+									-->
+								<!-- ****fin show*** -->
+								
+							</p:column>
+						</p:dataTable>
+						<br/>
+						<a href="ajout.jsf">Ajout Demande</a>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

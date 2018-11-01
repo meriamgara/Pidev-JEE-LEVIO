@@ -1,0 +1,125 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+		<h:panelGroup columns="2">
+
+			<h:form>
+				<p:dataTable value="#{demandeBean.demandes}" var="demande"
+					border="1" class="table table-hover">
+					<p:column headerText="Nom" filterBy="#{demande.nomD}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.nomD}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId" value="#{demande.nomD}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+
+					<p:column headerText="Prénom" filterBy="#{demande.prenomD}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.prenomD}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId2" value="#{demande.prenomD}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Diplome" filterBy="#{demande.diplome}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.diplome}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId3" value="#{demande.diplome}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="email" filterBy="#{demande.email}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.email}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId4" value="#{demande.email}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Nationalité" filterBy="#{demande.nationalite}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.nationalite}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId5" value="#{demande.nationalite}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Poste désiré"
+						filterBy="#{demande.poste}" filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.poste}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId6" value="#{demande.poste}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="TELEPHONE" filterBy="#{demande.tel}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.tel}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId7" value="#{demande.tel}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="TYPE" filterBy="#{demande.comptences}"
+						filterMatchMode="contains">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{demande.comptences}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="modelInputId8" value="#{demande.comptences}"
+									style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					
+					
+				</p:dataTable>
+
+
+
+			</h:form>
+
+		</h:panelGroup>
+		</div>
+</ui:define>
+
+</ui:composition>
