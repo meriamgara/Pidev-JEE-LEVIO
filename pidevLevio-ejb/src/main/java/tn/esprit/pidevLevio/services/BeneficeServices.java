@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import tn.esprit.pidev.entities.Benefice;
+import tn.esprit.pidevLevio.entities.Benefice;
 
 
 @Stateless

@@ -1,10 +1,10 @@
-package tn.esprit.pidev.services;
+package tn.esprit.pidevLevio.services;
 
 import java.util.List;
 
 import javax.ejb.Remote;
 
-import tn.esprit.pidev.entities.Benefice;
+import tn.esprit.pidevLevio.entities.Benefice;
 @Remote
 public interface BeneficeService {
 	public int 	SumBeneficeByProject(Benefice idben); 

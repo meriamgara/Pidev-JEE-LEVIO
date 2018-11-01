@@ -1,4 +1,4 @@
-package tn.esprit.pidev.services;
+package tn.esprit.pidevLevio.services;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,13 +10,13 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import tn.esprit.pidev.entities.User;
+import tn.esprit.pidevLevio.entities.User;
 
 
 @Stateless 
 @LocalBean
 public class UserService implements UserServiceRemote {
-	@PersistenceContext(unitName="pidev-ejb")
+	@PersistenceContext(unitName="pidevLevio-ejb")
     EntityManager em;
 	@Override
 	public void AddResponsable(User Responsable) {

@@ -1,4 +1,4 @@
-package tn.esprit.pidev.services;
+package tn.esprit.pidevLevio.services;
 
 import java.util.List;
 
@@ -8,12 +8,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import tn.esprit.pidev.entities.Projet;
-import tn.esprit.pidev.entities.User;
+import tn.esprit.pidevLevio.Projet;
+import tn.esprit.pidevLevio.entities.User;
 @Stateless
 @LocalBean
 public class ProjetService implements ProjetServiceRemote {
-	@PersistenceContext(unitName="pidev-ejb")
+	@PersistenceContext(unitName="pidevLevio-ejb")
 	EntityManager em;
 	
 

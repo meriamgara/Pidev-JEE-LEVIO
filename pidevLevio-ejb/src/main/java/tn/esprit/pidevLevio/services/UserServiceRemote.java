@@ -1,10 +1,10 @@
-package tn.esprit.pidev.services;
+package tn.esprit.pidevLevio.services;
 
 import java.util.List;
 
 import javax.ejb.Remote;
 
-import tn.esprit.pidev.entities.*;
+import tn.esprit.pidevLevio.entities.*;
 
 
 @Remote
