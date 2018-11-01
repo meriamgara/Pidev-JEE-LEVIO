@@ -1,4 +1,4 @@
-package tn.esprit.pidev.entities;
+package tn.esprit.pidevLevio.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import tn.esprit.pidev.entities.Projet;
+import tn.esprit.pidevLevio.entities.Projet;
 
 
 @Entity

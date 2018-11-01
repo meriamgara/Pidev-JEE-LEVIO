@@ -1,4 +1,4 @@
-package tn.esprit.pidev.entities;
+package tn.esprit.pidevLevio.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;

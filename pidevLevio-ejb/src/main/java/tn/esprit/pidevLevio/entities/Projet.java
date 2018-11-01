@@ -1,4 +1,4 @@
-package tn.esprit.pidev.entities;
+package tn.esprit.pidevLevio.entities;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import tn.esprit.pidev.entities.User;
+import tn.esprit.pidevLevio.entities.User;
 
 @Entity
 public class Projet implements Serializable {
