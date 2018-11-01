@@ -23,26 +23,31 @@
                 <div class="ui-g-12">
                     <p:graphicImage name="images/logo-ultima.svg" library="ultima-layout" />
                 </div>
-                <div class="ui-g-12">
-                    <h:panelGroup styleClass="md-inputfield">
-                        <p:inputText />
-                        <label>Username</label>
-                    </h:panelGroup>
-                </div>
-                <div class="ui-g-12">
-                    <h:panelGroup styleClass="md-inputfield">
-                        <p:password />
-                        <label>Password</label>
-                    </h:panelGroup>
-                </div>
-                <div class="ui-g-12">
-                    <p:button outcome="/dashboard" value="Sign In" icon="ui-icon-person" />
-                    <p:button outcome="/dashboard" value="Forgot Password" icon="ui-icon-help" styleClass="secondary"/>
-                </div>
+      <h:form id="form">
+
+
+<h:panelGrid columns="2">
+
+<h:outputText value="login"  />
+<h:inputText id="log" value="#{userBeans.login}" required="true" requiredMessage="login obligatoire"/>
+
+<h:outputText value="password" />
+<h:inputText id="pwd" value="#{userBeans.password}" required="true" requiredMessage="Invalid pwd"/>
+
+<center>
+<h:commandButton id="btn" action="#{userBeans.doLogin()}" value="login"  />
+
+</center>
+
+<h:message for="btn"/>
+<h:message for="pwd" style="color:red"/>
+</h:panelGrid>
+</h:form>
+            <h:message for="log" style="color:red"/>
             </div>
         </div>
         
-        <div class="login-footer">PrimeFaces Ultima</div>
+        <div class="login-footer">Levio Team</div>
         
         <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
         <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />

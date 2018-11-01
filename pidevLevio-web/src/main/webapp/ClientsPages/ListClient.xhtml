@@ -1,0 +1,123 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Ajouter Client" outcome="/ClientsPages/Addclient"
+							icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+							<p:menuitem value="Retrive All Client" outcome="/ClientsPages/ListClient"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+					</p:tabMenu>
+				</div>
+				<div class="card card-w-title">
+					<h1>List Client</h1>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+						<h:dataTable value="#{clientBeans.ConsulterClient()}" var="c" border="1">
+<h:column>
+<f:facet name="header">
+<h:outputText value="Nom" />
+</f:facet>
+<h:outputText value="#{c.nom}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Prenom" />
+</f:facet>
+<h:outputText value="#{c.prenom}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Adresse" />
+</f:facet>
+<h:outputText value="#{c.addresse}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Tel" />
+</f:facet>
+<h:outputText value="#{c.tel}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="login" />
+</f:facet>
+<h:outputText value="#{c.adresseMail}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Categorie" />
+</f:facet>
+<h:outputText value="#{c.categories}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Type" />
+</f:facet>
+<h:outputText value="#{c.type}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Nom" />
+</f:facet>
+<h:outputText value="#{c.nom}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Actif"/>
+</f:facet>
+<h:outputText value="#{c.actif == true ? 'oui' : 'Non'}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Delete"/>
+</f:facet>
+<h:commandButton action="#{clientBeans.deleteClient(c.id)}" value="supprimer" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Details"/>
+</f:facet>
+<h:commandButton  action="#{clientBeans.recupererUser(c)}" value="Details" />
+</h:column>
+
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Update"/>
+</f:facet>
+<h:commandButton  action="#{clientBeans.recupupdateclient(c)}" value="Modifier" />
+</h:column>
+</h:dataTable>
+
+<br/><br/>
+<a href="Addclient.jsf">ADD Client</a> 
+
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

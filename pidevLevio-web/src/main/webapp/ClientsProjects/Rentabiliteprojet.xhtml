@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml"
+                xmlns:rich="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+			<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="ADD Project" outcome="/ClientsProjects/Addproject"
+							icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+						<p:menuitem value="Retrive All Projects" outcome="/ClientsProjects/listprojet"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+							<p:menuitem value="Rentabilité Projet" outcome="/ClientsProjects/Rentabiliteprojet"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="2" />
+						</p:menuitem>
+<p:menuitem value="Benefice Project" outcome="/ClientsProjects/BeneficeProject"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="3" />
+						</p:menuitem>
+						
+					</p:tabMenu>
+				</div>
+				<div class="card card-w-title">
+					<h1>Rentabilité Projets</h1>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+<h:dataTable value="#{beneficesBeans.ConsulterBenefices()}" var="c" border="1">
+<h:column>
+<f:facet name="header">
+<h:outputText value="Titre" />
+</f:facet>
+<h:outputText value="#{c.projet.titre}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Prix Projet" />
+</f:facet>
+<h:outputText value="#{c.prix}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Budget Projet" />
+</f:facet>
+<h:outputText value="#{c.budget}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Budget Courant" />
+</f:facet>
+<h:outputText value="#{c.mois1+c.mois2+c.mois3+c.mois4+c.mois6+c.mois7+c.mois8+c.mois9+c.mois10+c.mois11+c.mois12+c.budgetCourant}" />
+</h:column>
+
+
+
+
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Rentable ou nn ??" />
+</f:facet>
+<h:outputText value="#{c.mois1+c.mois2+c.mois3+c.mois4+c.mois6+c.mois7+c.mois8+c.mois9+c.mois10+c.mois11+c.mois12+c.budgetCourant}" />
+</h:column>
+
+
+
+</h:dataTable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br/><br/>
+  
+<br/><br/>
+
+
+
+
+
+
+
+
+
+<br/><br/>
+  
+<br/><br/>
+					</h:form>
+					<br/><br/>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
