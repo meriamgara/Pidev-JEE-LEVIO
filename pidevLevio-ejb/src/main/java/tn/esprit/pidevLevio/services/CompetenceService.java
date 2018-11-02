@@ -75,7 +75,18 @@ public class CompetenceService implements CompetenceServiceInterface {
 				
 				return competences;
 	}
-	
+	@Override
+	public List<Competence> getListCompetenceByCategorie(typeCategorie t) {
+		TypedQuery<Competence> q = em
+				.createQuery("SELECT c FROM Competence c WHERE c.categorie LIKE :t", Competence.class)
+				.setParameter("t", t);
+		try {
+			return q.getResultList();
+		} catch (NoResultException e) {
+			System.out.println("Pas trouver");
+		}
+		return null;
+	}
 	
 	
 }

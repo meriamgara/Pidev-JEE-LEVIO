@@ -18,6 +18,8 @@ public interface CompetenceServiceInterface {
 	public List<Competence> getAllCompetence();
 
 	List<Competence> getCompetenceByCategorie(typeCategorie categorie);
+
+	List<Competence> getListCompetenceByCategorie(typeCategorie t);
 	
 	
 

@@ -34,6 +34,8 @@ public class Competence implements Serializable {
 	@OneToMany(mappedBy="competence",fetch=FetchType.EAGER)
 	private List<Evaluation> evaluations;
 	
+	private String picture;
+	
 	public int getId() {
 		return id;
 	}
@@ -65,21 +67,14 @@ public class Competence implements Serializable {
 	public void setCategorie(typeCategorie categorie) {
 		this.categorie = categorie;
 	}
-	
-	public Competence(int id, String libelle, typeCategorie categorie, List<Evaluation> evaluations) {
-		super();
-		this.id = id;
-		this.libelle = libelle;
-		this.categorie = categorie;
-		this.evaluations = evaluations;
-	}
+
 	
 
-	public Competence(int id, String libelle, typeCategorie categorie) {
+	public Competence(String libelle, typeCategorie categorie, String picture) {
 		super();
-		this.id = id;
 		this.libelle = libelle;
-		this.categorie=categorie; 
+		this.categorie = categorie;
+		this.picture=picture; 
 	}
 
 	public Competence() {
