@@ -1,0 +1,127 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Ajouter Demande" outcome="/DemandePages/ajout"
+							icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+						
+						
+						<p:menuitem value="Mes Demandes"
+							outcome="/DemandePages/MesDemandes"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+						
+					</p:tabMenu>
+
+				</div>
+				<div class="card card-w-title">
+					<h1>Ajouter Demande</h1>
+
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:outputText value="#{demandeBean.message}" rendered="#{!empty demandeBean.message}"  />
+					<h:form  prependId="false" enctype="multipart/form-data">
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+							layout="grid" styleClass="ui-panelgrid-blank form-group"
+							style="border:0px none; background-color:transparent;">
+							<p:outputLabel for="nomD" value="nomD" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="nomD" value="#{demandeBean.nomD}" autocomplete="off" />
+								<label>Nom</label>
+							</h:panelGroup>
+							
+							
+							<p:outputLabel for="prenomD" value="prenomD" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="prenomD" value="#{demandeBean.prenomD}" autocomplete="off" />
+								<label>Prenom</label>
+							</h:panelGroup>
+							
+							<p:outputLabel for="diplome" value="diplome" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText  id="diplome" value="#{demandeBean.diplome}" autocomplete="off" />
+								<label>Diplome</label>
+							</h:panelGroup>
+							
+							<p:outputLabel for="age" value="age" />
+							<h:panelGroup  styleClass="md-inputfield">
+								<p:inputText id="age" value="#{demandeBean.age}" autocomplete="off" />
+								<label>Age</label>
+							</h:panelGroup>
+							
+							
+							<p:outputLabel for="tel" value="tel" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="tel" value="#{demandeBean.tel}" autocomplete="off" />
+								<label>Telephone</label>
+							</h:panelGroup>
+							
+							
+							<p:outputLabel for="email" value="email" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="email" value="#{demandeBean.email}" autocomplete="off" >
+								<f:validator validatorId="valideur"/>
+								</p:inputText>
+								<h:message for="courriel" style="Color:red"/>
+								
+								<label>E-mail</label>
+							</h:panelGroup>
+							
+							<p:outputLabel for="nationalite" value="nationnalite" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="nationalite"  value="#{demandeBean.nationalite}" autocomplete="off" />
+								<label>Nationalité</label>
+							</h:panelGroup>
+							
+							<p:outputLabel for="imageFile" value="imageFile" />
+							<h:panelGroup styleClass="md-inputfield">
+								<h:inputFile id="imageFile" value="#{demandeBean.imageFile}" autocomplete="off" />
+								<label>Image</label>
+							</h:panelGroup>
+							
+							
+							<p:outputLabel for="cvFile" value="cvFile" />
+							<h:panelGroup styleClass="md-inputfield">
+								<h:inputFile id="cvFile" value="#{demandeBean.cvFile}" autocomplete="off" />
+								<label>CV</label>
+							</h:panelGroup>
+							
+							
+							<p:outputLabel for="poste" value="poste" />
+							<h:panelGroup styleClass="md-inputfield">
+								<p:inputText id="poste" value="#{demandeBean.poste}" autocomplete="off" />
+								<label>Poste</label>
+							</h:panelGroup>
+							
+							 <h:panelGroup styleClass="md-inputfield">
+							
+                    <p:inputTextarea rows="3" placeholder="votre compétences" value="#{demandeBean.comptences}" autoResize="false"/>
+                    		<label> </label>
+     				</h:panelGroup>
+     				<br/>
+     				<br/>
+							<p:commandButton value="Ajouter" styleClass="red-button"
+								style="width:100px" update="@form" ajax="false"
+								action="#{demandeBean.ajouterDemande()}"/>
+
+						</p:panelGrid>
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

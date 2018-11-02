@@ -8,6 +8,10 @@ import javax.faces.bean.ManagedBean;
 
 import tn.esprit.pidevLevio.entities.typeCategorie;
 
+import tn.esprit.pidevLevio.entities.User.Role;
+import tn.esprit.pidevLevio.entities.User.categorie;
+import tn.esprit.pidevLevio.entities.User.typeclient;
+
 @ManagedBean
 @ApplicationScoped
 public class Data {
@@ -34,7 +38,17 @@ public class Data {
 	public void setCategorie(typeCategorie categorie) {
 		this.categorie = categorie;
 	} 
-	 
+	 	public Role[] getRole(){
+			return Role.values(); 
+		}
+		
+		public categorie[] getCategories(){
+			return categorie.values(); 
+		}
+		
+		public typeclient[] getType(){
+			return typeclient.values(); 
+		}
 	 
 	 
 	 

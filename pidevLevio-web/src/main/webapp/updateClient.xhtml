@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+					<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="Ajouter Client" outcome="/ClientsPages/Addclient"
+							icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+							<p:menuitem value="Retrive All Client" outcome="/ClientsPages/ListClient"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+					</p:tabMenu>
+				</div>
+				<div class="card card-w-title">
+					<h1>Modifier Client</h1>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+
+<h:panelGrid columns="2">
+
+<h:outputText value="Nom" />
+<h:inputText value="#{clientBeans.nom}" />
+
+<h:outputText value="Prenom" />
+<h:inputText value="#{clientBeans.prenom}" />
+
+<h:outputText value="Addresse" />
+<h:inputText value="#{clientBeans.addresse}" />
+
+<h:outputText value="Tel" />
+<h:inputText value="#{clientBeans.tel}" />
+
+<h:outputText value="login (email)" />
+<h:inputText value="#{clientBeans.adresseMail}" />
+
+
+<h:outputText value="Password" />
+<h:inputText value="#{clientBeans.password}" />
+
+<h:outputText value="Actif / Inactif" />
+<h:selectBooleanCheckbox value="#{clientBeans.actif}" />
+
+ <h:outputText value="Role" />
+<h:selectOneMenu value="#{clientBeans.role}">
+	<f:selectItem itemLabel="selectionner le Role " itemValue=""/>
+	<f:selectItems value="#{data.role}"/>
+</h:selectOneMenu>
+
+ <h:outputText value="Type Client" />
+<h:selectOneMenu value="#{clientBeans.type}">
+	<f:selectItem itemLabel="selectionner le type " itemValue=""/>
+	<f:selectItems value="#{data.type}"/>
+</h:selectOneMenu>
+
+<h:outputText value="Categorie Client" />
+<h:selectOneMenu value="#{clientBeans.categories}">
+	<f:selectItem itemLabel="selectionner la categorie " itemValue=""/>
+	<f:selectItems value="#{data.categories}"/>
+</h:selectOneMenu>
+
+<h:commandButton action="#{clientBeans.modifierClient()}" value="modifier" /> 
+
+
+
+</h:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>

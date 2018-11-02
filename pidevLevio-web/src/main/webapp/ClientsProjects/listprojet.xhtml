@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="card">
+			<p:tabMenu activeIndex="#{param.i}">
+						<p:menuitem value="ADD Project" outcome="/ClientsProjects/Addproject"
+							icon="ui-icon-add">
+							<f:param name="i" value="0" />
+						</p:menuitem>
+						<p:menuitem value="Retrive All Projects" outcome="/ClientsProjects/listprojet"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="1" />
+						</p:menuitem>
+								<p:menuitem value="Rentabilité Projet" outcome="/ClientsProjects/Rentabiliteprojet"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="2" />
+						</p:menuitem>
+
+						
+							<p:menuitem value="Benefice Project" outcome="/ClientsProjects/BeneficeProject"
+							icon="ui-icon-insert-drive-file">
+							<f:param name="i" value="3" />
+						</p:menuitem>
+					</p:tabMenu>
+				</div>
+				<div class="card card-w-title">
+					<h1>List Client</h1>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
+					<h:form>
+	<h:dataTable value="#{projectBeans.ConsulterProjet()}" var="c" border="1">
+<h:column>
+<f:facet name="header">
+<h:outputText value="Titre" />
+</f:facet>
+<h:outputText value="#{c.titre}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Description" />
+</f:facet>
+<h:outputText value="#{c.description}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Consultant" />
+</f:facet>
+<h:outputText value="#{c.responsable.nom}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Client" />
+</f:facet>
+<h:outputText value="#{c.client.nom}" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Delete"/>
+</f:facet>
+<h:commandButton action="#{projectBeans.deleteProjet(c.id)}" value="supprimer" />
+</h:column>
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Details"/>
+</f:facet>
+<h:commandButton  value="Details" />
+</h:column>
+
+
+<h:column>
+<f:facet name="header">
+<h:outputText value="Update"/>
+</f:facet>
+<h:commandButton action="#{projectBeans.recupProj(c)}" value="Modifier" />
+</h:column>
+
+
+<br/><br/>
+  
+</h:dataTable><br/><br/>
+<a href="Addproject.jsf">ADD Projectt</a>
+
+
+					</h:form>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
